@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5000:8080"   # navegador -> container
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=Desafio;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+      - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -Q 'SELECT 1'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    command: >
+      /bin/bash -c "
+        /opt/mssql/bin/sqlservr & 
+        wait
+      "
+
+
+volumes:
+  sql_data:
