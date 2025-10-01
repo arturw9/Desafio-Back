@@ -7,6 +7,7 @@ Este projeto foi desenvolvido com .NET 8.0, Angular 20.3 e SQL Server, utilizand
 Banco de Dados
 
 Altere as configurações de conexão no arquivo appsettings.json e no docker-compose.yml de acordo com o seu ambiente de banco de dados e Docker.
+Arquivo create-database.sql presente em Desafio/init-db/create-database.sql é utilizado para auxiliar na criação do banco de dados e usuario, verifique a necessidade do mesmo.
 
 Migrações
 
