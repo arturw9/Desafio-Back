@@ -26,7 +26,7 @@ Os testes unitários estão localizados no projeto, em Desafio.Tests, incluindo:
 
 Desafio.Tests/ControllersTeste/TituloControllerTeste.cs
 
-▶️ Como rodar o projeto
+▶️ Como rodar o projeto: 
 docker-compose up -d --build
 
 📂 Estrutura de Telas
